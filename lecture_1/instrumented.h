@@ -44,6 +44,17 @@ struct instrumented {
   instrumented() {
     meta_.increment(4);
   }
+
+  friend
+  bool operator==(const instrumented& x, const instrumented& y) {
+    meta_.increment(5);
+    return x.val == y.val;
+  }
+
+  friend
+  bool operator!=(const instrumented& x, const instrumented& y) {
+    return !(x == y);
+  }
 };
 
 #endif
