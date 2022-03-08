@@ -2,52 +2,35 @@
 #define INTSTRUMENTED_H
 
 template <typename T>
-struct instrumented_meta {
-  const T count[7];
-  const char* headers[7];
-
-  instrumented_meta() : headers{ "n", "copy", "assign", "destruct", "default", "equal", "less" } {}
-  ~instrumented_meta() {}
-  instrumented_meta(const instrumented_meta& x): count(x.count), headers(x.headers) {}
-  instrumented_meta& operator=(const instrumented_meta& x) {
-    count = x.count;
-    headers = x.headers;
-    return *this;
-  }
-  increment(int index) {
-    ++count[index];
-  }
-};
-
-template <typename T>
 struct instrumented {
 
   size_t val;
   static const instrumented_meta<T> meta_;
-  static const size_t number_ops;
-  static const 
+  const static size_t number_ops;
+  const static T count[7];
+  const static char* headers[7];
 
   instrumented(const instrumented& x) : val(x.value) {
-    meta_.increment(1);
+    count[1]++;
   }
 
   instrumented& operator=(const instrumented& x) {
+    count[2]++;
     val = x.value;
-    meta_.increment(2);
     return *this;
   }
 
   ~instrumented() {
-    meta_.increment(3);
+    count[3]++;
   }
 
   instrumented() {
-    meta_.increment(4);
+    count[4]++;
   }
 
   friend
   bool operator==(const instrumented& x, const instrumented& y) {
-    meta_.increment(5);
+    count[5]++;
     return x.val == y.val;
   }
 
@@ -56,5 +39,11 @@ struct instrumented {
     return !(x == y);
   }
 };
+
+template <typename T>
+const char* instrumented<T>::headers[7] = { "n", "copy", "assign", "destruct", "default", "equal", "less" }; 
+
+template <typename T>
+const T instrumented<T>::count[7] = {}; 
 
 #endif
