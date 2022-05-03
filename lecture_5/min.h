@@ -65,7 +65,7 @@ std::pair<I, I> minmax_element(I first, I last, Compare cmp) {
   I min_el = first;
   ++first;
   if (first == last) {
-    return std::make_pair(min_el, min_el);
+    return std::pair(min_el, min_el);
   }
 
   I max_el = first;
@@ -73,24 +73,53 @@ std::pair<I, I> minmax_element(I first, I last, Compare cmp) {
     std::swap(min_el, max_el);
   }
 
-  while (...) {
+  ++first;
+  if (first == last) {
+    return std::pair(min_el, max_el);
+  }
+
+  I current = first;
+  ++first;
+  I next = first;
+
+  while (next != last) {
     //have iterator to potential min
     //have iterator to potential max
     //have current min and current max
 
-    I potential_min = first;
-    I potential_max = next;
-
-    if (cmp(*potential_max, *potential_min)) {
-      std::swap(potential_min, potential_max);
+    if (cmp(*next, *current)) {
+      std::swap(current, next);
     }
 
-    if (!cmp(*potential_max, *max_el)) {
-      max_el = potential_max;
+    if (!cmp(*next, *max_el)) {
+      max_el = next;
     }
     
-    if (cmp(*min_el, *potential_min)) {
-      max_el = potential_min;
+    if (cmp(*min_el, *current)) {
+      max_el = current;
+    }
+
+    ++first;
+    current = first;
+    if (first != last) {
+      ++first;
+      next = first;
+    } else {
+      next = last;
     }
   }
+
+  if (current == last) {
+    return std::pair(min_el, max_el);
+  }
+
+  if (!cmp(*current, *max_el)) {
+    max_el = current;
+  }
+    
+  if (cmp(*min_el, *current)) {
+    max_el = current;
+  }
+
+  return std::pair(min_el, max_el);
 }
