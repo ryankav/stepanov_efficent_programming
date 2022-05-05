@@ -78,16 +78,11 @@ std::pair<I, I> minmax_element(I first, I last, Compare cmp) {
     return std::pair(min_el, max_el);
   }
 
-  I current = first;
-  ++first;
-  I next = first;
+  I next = first + 1;
 
   while (next != last) {
-    //have iterator to potential min
-    //have iterator to potential max
-    //have current min and current max
 
-    if (cmp(*next, *current)) {
+    if (cmp(*next, *first)) {
       std::swap(current, next);
     }
 
@@ -95,30 +90,29 @@ std::pair<I, I> minmax_element(I first, I last, Compare cmp) {
       max_el = next;
     }
     
-    if (cmp(*min_el, *current)) {
-      max_el = current;
+    if (cmp(*min_el, *first)) {
+      max_el = first;
+    }
+
+    if (first < next) {
+      first = next;
     }
 
     ++first;
-    current = first;
+    
     if (first != last) {
-      ++first;
-      next = first;
-    } else {
-      next = last;
+      next = first + 1;
     }
   }
 
-  if (current == last) {
-    return std::pair(min_el, max_el);
-  }
-
-  if (!cmp(*current, *max_el)) {
-    max_el = current;
-  }
-    
-  if (cmp(*min_el, *current)) {
-    max_el = current;
+  if (first != last) {
+    if (!cmp(*first, *max_el)) {
+      max_el = first;
+    }
+      
+    if (cmp(*min_el, *first)) {
+      max_el = first;
+    }
   }
 
   return std::pair(min_el, max_el);
