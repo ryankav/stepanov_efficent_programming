@@ -91,7 +91,7 @@ std::pair<I, I> minmax_element(I first, I last, Compare cmp) {
     }
     
     if (cmp(*min_el, *first)) {
-      max_el = first;
+      min_el = first;
     }
 
     if (first < next) {
@@ -111,7 +111,7 @@ std::pair<I, I> minmax_element(I first, I last, Compare cmp) {
     }
       
     if (cmp(*min_el, *first)) {
-      max_el = first;
+      min_el = first;
     }
   }
 
