@@ -1,3 +1,15 @@
+template<typename T, typename Op>
+class binary_counter 
+{
+  private:
+    std::vector<T> counter;
+    T zero;
+    Op op;
+  
+  public:
+    binary_counter(const Op& op, const T& zero): op(op), zero(zero) {}; 
+};
+
 template<typename T, typename I, typename Op>
 // requires Op is BinaryOperation on T
 // Op is associative
