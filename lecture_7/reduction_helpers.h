@@ -8,6 +8,14 @@ class binary_counter
   
   public:
     binary_counter(const Op& op, const T& zero): op(op), zero(zero) {}; 
+
+    void add(T x) {
+      x = add_to_counter(counter.begin(), counter.end(), zero x);
+
+      if (x != 0) {
+        counter.push_back(x);		
+      }
+    }
 };
 
 template<typename T, typename I, typename Op>
