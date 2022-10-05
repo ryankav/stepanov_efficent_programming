@@ -32,8 +32,7 @@ template<typename T, typename I, typename Op>
 // An intersting point that alex makes is that whilst Carry could
 // be passed by reference it's better to pass by value so that the
 // assignement isn't a jump to a far away piece of memory in the loop
-// better to have it near by so the assignement is more likely to be
-// in memory already
+// better to have it near by so the assignement is in memory already
 T add_to_counter(I first, I last, Op op, const T& zero, T carry) {
   while (first != last) {
     if (*first == zero) {
