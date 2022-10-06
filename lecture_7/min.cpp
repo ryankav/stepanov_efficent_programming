@@ -1,5 +1,26 @@
 #include "binary_counter.h"
 
+//TODO: Need to define MinOp class or stuct/functor.
+// - compares two iterators and returns the one 
+// pointing to the smallest one
+
+
+template <typename Compare>
+class MinOp
+{
+  private:
+    Compare cmp;
+  
+  public:
+    MinOp(Compare const& cmp): cmp(cmp) {}
+
+    //What's the iterator type? We can template it
+    template <typename I>
+    I operator()(I const& x, I const& y) {
+      return cmp(*y, *x) ? y : x;
+    } 
+};
+
 template <typename I, typename Compare>
 // requires I is a ForwardIterator
 // and Compare is a StrickWeakOrdering on ValueType(I)
