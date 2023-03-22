@@ -5,7 +5,6 @@
 
 template <typename T>
 struct instrumented {
-
   const static size_t number_ops;
   static T counts[number_ops];
   const static char* counter_names[number_ops];
@@ -13,11 +12,11 @@ struct instrumented {
   size_t val;
 
   //regular type
-  instrumented(const instrumented& x) : val(x.val) {
+  instrumented(instrumented const& x) : val(x.val) {
     counts[1]++;
   }
 
-  instrumented& operator=(const instrumented& x) {
+  instrumented& operator=(instrumented const& x) {
     counts[2]++;
 
     val = x.val;
@@ -33,41 +32,41 @@ struct instrumented {
   }
 
   friend
-  bool operator==(const instrumented& x, const instrumented& y) {
+  bool operator==(instrumented const& x, instrumented const& y) {
     counts[5]++;
     return x.val == y.val;
   }
 
   friend
-  bool operator!=(const instrumented& x, const instrumented& y) {
+  bool operator!=(instrumented const& x, instrumented const& y) {
     return !(x == y);
   }
 
   //totally ordered
   friend
-  bool operator<(const instrumented& x, const instrumented& y) {
+  bool operator<(instrumented const& x, instrumented const& y) {
     counts[6]++;
     return x.val < y.val;
   }
 
   friend
-  bool operator>(const instrumented& x, const instrumented& y) {
+  bool operator>(instrumented const& x, instrumented const& y) {
     return y < x;
   }
 
   friend
-  bool operator<=(const instrumented& x, const instrumented& y) {
+  bool operator<=(instrumented const& x, instrumented const& y) {
     return !(y < x);
   }
 
   friend
-  bool operator>=(const instrumented& x, const instrumented& y) {
+  bool operator>=(instrumented const& x, instrumented const& y) {
     return !(x < y);
   }
 
   //Conversions
 
-  explicit instrumented(const T& x) : val(x) {}
+  explicit instrumented(T const& x) : val(x) {}
 
   operator const T() const {
     return val;
@@ -81,10 +80,10 @@ struct instrumented {
 };
 
 template<typename T>
-const size_t instrumented<T>::number_ops = 7;
+size_t const instrumented<T>::number_ops = 7;
 
 template <typename T>
-const char* instrumented<T>::counter_names[instrumented<T>::number_ops] = { "n", "copy", "assign", "destruct", "default", "equal", "less" }; 
+char* const instrumented<T>::counter_names[instrumented<T>::number_ops] = { "n", "copy", "assign", "destruct", "default", "equal", "less" }; 
 
 template <typename T>
 T instrumented<T>::counts[instrumented<T>::number_ops] = {};
