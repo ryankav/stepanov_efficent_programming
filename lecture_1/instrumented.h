@@ -1,11 +1,13 @@
 #ifndef INTSTRUMENTED_H
 #define INTSTRUMENTED_H
 
+#include <stddef.h>
 #include <iterator>
 
 template <typename T>
 struct instrumented {
-  const static size_t number_ops;
+
+  constexpr static size_t number_ops = 7;
   static T counts[number_ops];
   const static char* counter_names[number_ops];
 
@@ -78,9 +80,6 @@ struct instrumented {
 
   static void initialize(size_t n);
 };
-
-template<typename T>
-size_t const instrumented<T>::number_ops = 7;
 
 template <typename T>
 char* const instrumented<T>::counter_names[instrumented<T>::number_ops] = { "n", "copy", "assign", "destruct", "default", "equal", "less" }; 
