@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/home/ryan/personal/stepanov_efficent_programming/build/lecture_1",
+  "command": "/usr/lib/ccache/c++    -o CMakeFiles/Lecture_1.dir/count_operations.cpp.o -c /home/ryan/personal/stepanov_efficent_programming/lecture_1/count_operations.cpp",
+  "file": "/home/ryan/personal/stepanov_efficent_programming/lecture_1/count_operations.cpp"
+},
+{
+  "directory": "/home/ryan/personal/stepanov_efficent_programming/build/lecture_3",
+  "command": "/usr/lib/ccache/c++    -o CMakeFiles/Lecture_3.dir/count_operations.cpp.o -c /home/ryan/personal/stepanov_efficent_programming/lecture_3/count_operations.cpp",
+  "file": "/home/ryan/personal/stepanov_efficent_programming/lecture_3/count_operations.cpp"
+},
+{
+  "directory": "/home/ryan/personal/stepanov_efficent_programming/build/lecture_3",
+  "command": "/usr/lib/ccache/c++    -o CMakeFiles/Lecture_3.dir/instrumented.cpp.o -c /home/ryan/personal/stepanov_efficent_programming/lecture_3/instrumented.cpp",
+  "file": "/home/ryan/personal/stepanov_efficent_programming/lecture_3/instrumented.cpp"
+}
+]
